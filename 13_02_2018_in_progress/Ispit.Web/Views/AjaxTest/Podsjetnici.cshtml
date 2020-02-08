@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit.Web.ViewModels.AjaxTestPodsjetniciVM
+
+@foreach (var p in Model.Podsjetnici)
+{
+    @foreach (var o in p.ListaObaveza)
+    {
+        <div class="alert alert-warning" role="alert">
+            <strong>Događaj @p.OpisDogadjaja - @p.DatumDogadjaja.ToString("dd.MM.yyyy")</strong> <br />
+            Ovo je podsjetnik za obavezu @o.NazivObaveze. Označi kao <a asp-action="Procitana" asp-route-stanjeObavezeId="@o.StanjeObavezeId" class="">pročitanu.</a>
+        </div>
+    }
+}

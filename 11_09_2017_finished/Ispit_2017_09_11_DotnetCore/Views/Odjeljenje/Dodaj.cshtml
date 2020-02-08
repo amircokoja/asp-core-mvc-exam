@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_09_11_DotnetCore.ViewModels.OdjeljenjeDodajVM
+
+<h3>Dodaj odjeljenje</h3>
+<form asp-action="Snimi">
+    <div class="form-group">
+        <label>Školska godina</label>
+        <input class="form-control" asp-for="SkolskaGodina" />
+    </div>
+    <div class="form-group">
+        <label>Razred</label>
+        <input class="form-control" asp-for="Razred" />
+    </div>
+    <div class="form-group">
+        <label>Oznaka</label>
+        <input class="form-control" asp-for="Oznaka"/>
+    </div>
+    <div class="form-group">
+        <label>Razrednik</label>
+        <select class="form-control" asp-for="RazrednikId" asp-items="@Model.ListaRazrednika">
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Preuzmi učenike iz nižeg odjeljenja</label>
+        <select class="form-control" asp-for="NizeOdjeljenjeId" asp-items="@Model.ListaNizihOdjeljenja">
+            <option selected value="0">Izaberite nize odjeljenje</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Snimi</button>
+</form>

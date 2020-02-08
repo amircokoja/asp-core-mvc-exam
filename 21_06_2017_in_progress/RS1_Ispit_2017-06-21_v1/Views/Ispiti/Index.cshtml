@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model RS1_Ispit_2017_06_21_v1.ViewModels.IspitiIndexVM
+
+<h1>Prikaz evidentiranih maturskih ispita</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Odjeljenje</th>
+            <th>Ispitivač</th>
+            <th>Prosječni bodovi</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Datum.ToString("dd.MM.yyyy")</td>
+            <td>@x.Odjeljenje</td>
+            <td>@x.Ispitivac</td>
+            <td>@x.ProsjecniBodovi</td>
+            <td><a asp-action="Detalji" asp-route-maturskiIspitId="@x.MaturskiIspitId" class="btn btn-info">Detalji</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Dodaj" class="btn btn-primary">Dodaj</a>

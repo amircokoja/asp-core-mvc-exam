@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Dodaj";
+}
+@model Ispit_2017_02_15.ViewModels.OdjeljenjeDodajVM
+
+<h2>Novi cas</h2>
+<form asp-action="Snimi">
+    <div class="form-group">
+        <label>Nastavnik</label>
+        <input asp-for="Nastavnik" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Datum</label>
+        <input asp-for="Datum" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Ak godina/Predmet</label>
+        @if (Model.AkademskaGodinaPredmet == "")
+        {
+            <select asp-for="AngazovanId" asp-items="@Model.ListaPredmeta" class="form-control"></select>
+        }
+        else
+        {
+            <input asp-for="AkademskaGodinaPredmet" class="form-control" readonly />
+        }
+
+        <input type="hidden" asp-for="OdrzaniCasId" />
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+</form>
+
+
+@if (Model.OdrzaniCasId != 0)
+{
+    <div id="divID"></div>
+
+
+    <script>
+    $(document).ready(function () {
+                $.get("/ajaxtest/IspisStudenata?odrzaniCasId=@Model.OdrzaniCasId", function (data, status) {
+                        $("#divID").html(data);
+        });
+    });
+
+    </script>
+
+
+}
+
+
+

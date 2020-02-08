@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Obaveze";
+}
+@model Ispit.Web.ViewModels.AjaxTestObavezeVM
+
+<h2>Obaveze dogadjaja</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>
+                Procenat realizacije
+                obaveze
+            </th>
+            <th>
+                Šalji notifikaciju x dana
+                unaprijed
+            </th>
+            <th>
+                Ponavljaj notifikaciju svaki dan do
+                početka događaja
+            </th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Naziv</td>
+            <td>@x.Procenat</td>
+            <td>@x.BrojDana</td>
+            @if (x.Ponavljaj)
+            {
+                <td>Da</td>
+            }
+            else
+            {
+                <td>Ne</td>
+            }
+            <td>
+                <a asp-action="Uredi" ajax-poziv="da" ajax-rezultat="divID" asp-route-stanjeObavezeId="@x.StanjeObavezeId" class="btn btn-info">Uredi</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

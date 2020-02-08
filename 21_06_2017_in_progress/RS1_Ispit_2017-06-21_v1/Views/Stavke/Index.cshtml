@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model RS1_Ispit_2017_06_21_v1.ViewModels.StavkeIndexVM
+
+    <h1>Rezultati ispita</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Opći uspjeh</th>
+            <th>Bodovi</th>
+            <th>Oslobođen</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Ucenik</td>
+            <td>@x.OpciUspjeh</td>
+            @if (x.Oslobodjen)
+            {
+                <td>Oslobodjen</td>
+            }
+            else
+            {
+                <td>
+                    <input id=@x.StavkaId asp-for="@x.Bodovi" />
+            <a asp-action="SnimiBodove" ajax-poziv="daa" ajax-rezultat="divID" stavkaId="@x.StavkaId" class="btn btn-sm btn-success">Snimi</a>
+            </td>
+            }
+            
+            @if (x.Oslobodjen)
+            {
+            <td>Da</td>
+            } else
+            {
+            <td>Ne</td>
+            }
+            <td><a asp-action="Uredi" ajax-poziv="da" ajax-rezultat="divID" asp-route-stavkaId="@x.StavkaId" class="btn btn-info">Uredi</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+

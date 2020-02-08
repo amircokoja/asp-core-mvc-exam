@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model Ispit.Web.ViewModels.OznaceniDogadajiVM
+
+
+<div id="podsjetnici">
+
+</div>
+
+
+
+<h2>Neoznačeni događaji</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Nastavnik</th>
+            <th>Opis</th>
+            <th>Broj obaveza</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var od in Model.NeoznaceniDogadjaji)
+        {
+            <tr>
+                <td>@od.DatumDogadjaja</td>
+                <td>@od.Nastavnik</td>
+                <td>@od.OpisDogadjaja</td>
+                <td>@od.BrojObaveza</td>
+                <td>
+                    <a asp-action="Dodaj" asp-route-dogadjajId=@od.DogadjajId class="btn btn-primary">Dodaj</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+
+<h2>Označeni događaji</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Nastavnik</th>
+            <th>Opis</th>
+            <th>Relizovano obaveza RO</th>
+            <th>Akcija</th>
+    </thead>
+    <tbody>
+        @foreach (var nd in Model.OznaceniDogadjaji)
+        {
+            <tr>
+                <td>@nd.DatumDogadjaja</td>
+                <td>@nd.Nastavnik</td>
+                <td>@nd.OpisDogadjaja</td>
+                <td>@nd.RealizovanoObaveza %</td>
+                <td>
+                    <a asp-action="Detalji" asp-route-dogadjajId="@nd.DogadjajId" class="btn btn-primary">Detalji</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<script>
+    $(document).ready(function (parameters) {
+        $.get("/ajaxtest/podsjetnici?korisnikId=@Model.korisnikId", function (data, status) {
+            $("#podsjetnici").html(data);
+        });
+    });
+</script>

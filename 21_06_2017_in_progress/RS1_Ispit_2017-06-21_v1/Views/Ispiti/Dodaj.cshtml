@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model RS1_Ispit_2017_06_21_v1.ViewModels.IspitiDodajVM
+
+    <h1>Novi maturski ispit</h1>
+
+    <form asp-action="Snimi">
+        <div class="form-group">
+            <label>Ispitivač</label>
+            <input asp-for="Ispitivac" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Datum</label>
+            <input asp-for="Datum" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label></label>
+            <select asp-for="OdjeljenjeId" asp-items="@Model.ListaOdjeljenja" class="form-control"></select>
+        </div>
+
+        <input type="hidden" asp-for="IspitivacId" />
+
+        <button type="submit" class="btn btn-primary">Snimi</button>
+    </form>

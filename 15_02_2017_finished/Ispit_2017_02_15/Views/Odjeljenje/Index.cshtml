@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_02_15.ViewModels.OdjeljenjeIndexVM
+
+
+    <h3>Prikaz održanih časova za nastavnika @Model.nastavnik.Ime</h3>
+<table class="table table-hover">
+    <thead class="bg-info">
+        <tr>
+            <th>Datum održanog časa</th>
+            <th>Akademska godina</th>
+            <th>Broj prisutnih</th>
+            <th>Predmet</th>
+            <th>Prosječna ocjena</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Datum.ToString("dd.MM.yyyy")</td>
+            <td>@x.AkademskaGodina</td>
+            <td>@x.BrojPrisutnih od @x.UkupnoStudenata</td>
+            <td>@x.Predmet</td>
+            <td>@x.ProsjecnaOcjena</td>
+            <td>
+                <a asp-action="Uredi" asp-route-odrzaniCasoviId=@x.OdrzaniCasoviId class="btn btn-info">Uredi</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Dodaj" class="btn btn-primary" asp-route-nastavnikId="@Model.nastavnik.Id">Dodaj</a>

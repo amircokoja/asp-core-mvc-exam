@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Detalji";
+}
+@model Ispit.Web.ViewModels.OznaceniDogadajiDetaljiVM
+
+<h2>Detalji dogadjaja</h2>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Datum dogadjaja</td>
+            <td>@Model.DatumDogadjaja</td>
+        </tr>
+        <tr>
+            <td>Datum dodavanja</td>
+            <td>@Model.DatumDodavanja</td>
+        </tr>
+        <tr>
+            <td>Opis događaja</td>
+            <td>@Model.Opis</td>
+        </tr>
+        <tr>
+            <td>Nastavnik</td>
+            <td>@Model.Nastavnik</td>
+        </tr>
+    </tbody>
+</table>
+
+<div id="divID"></div>
+
+<script>
+    $(document).ready(function (parameters) {
+        $.get("/ajaxtest/obaveze?oznaceniDogadjajId=@Model.OznaceniDogadjajId", function (data, status) {
+            $("#divID").html(data);
+        });
+    });
+</script>

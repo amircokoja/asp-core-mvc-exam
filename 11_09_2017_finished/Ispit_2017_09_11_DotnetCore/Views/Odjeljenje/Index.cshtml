@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_09_11_DotnetCore.ViewModels.OdjeljenjeIndexVM
+
+<h3>Prikaz odjeljenja</h3>
+<table class="table">
+    <thead class="bg-primary">
+        <tr>
+            <th>
+                Školska
+                godina
+            </th>
+            <th>
+                Razred
+                (1 do 4)
+            </th>
+            <th>Oznaka</th>
+            <th>Razrednik</th>
+            <th>
+                Prebačeni
+                u više
+                odjeljenje
+                (razred)
+            </th>
+            <th>
+                Prosjek
+                ocjena
+            </th>
+            <th>
+                Najbolji
+                učenik
+            </th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.SkolskaGodina</td>
+            <td>@x.Razred</td>
+            <td>@x.Oznaka</td>
+            <td>@x.Razrednik</td>
+            @if (x.PrebaceniUViseOdjeljenja)
+            {
+                <td>DA</td>
+            }
+            else
+            {
+                <td>NE</td>
+            }
+
+            <td>@x.ProsjekOcjena</td>
+            <td>@x.NajboljiUcenik</td>
+            <td>
+                <a class="btn btn-info" asp-action="Detalji" asp-route-odjeljenjeId=@x.OdjeljenjeId>Detalji</a>
+                <a class="btn btn-danger" asp-action="Obrisi" asp-route-odjeljenjeId="@x.OdjeljenjeId">Obrisi</a>
+            </td>
+        </tr>
+        }
+</tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Dodaj">Dodaj</a>

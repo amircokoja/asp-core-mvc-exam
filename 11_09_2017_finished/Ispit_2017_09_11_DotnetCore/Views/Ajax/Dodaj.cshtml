@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_09_11_DotnetCore.ViewModels.AjaxDodajVM
+
+
+    <h3>Dodaj učenika u odjeljenje</h3>
+    <form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="divID">
+        <div class="form-group">
+            <label>Ucenik</label>
+            <select asp-for="UcenikId" asp-items="@Model.ListaUcenika" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Broj u dnevniku</label>
+            <input asp-for="BrojUDnevniku" class="form-control" />
+        </div>
+
+        <input asp-for="OdjeljenjeId" type="hidden" />
+        <input asp-for="OdjeljenjeStavkeId" type="hidden" />
+
+
+        <button>Snimi</button>
+    </form>

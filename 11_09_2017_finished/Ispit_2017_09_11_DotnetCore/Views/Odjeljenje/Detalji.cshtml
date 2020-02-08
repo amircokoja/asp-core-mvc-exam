@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_09_11_DotnetCore.ViewModels.OdjeljenjeDetaljiVM
+
+<h3>Dodaj odjeljenje</h3>
+<div class="form-group">
+    <label>Školska godina</label>
+    <input class="form-control" asp-for="SkolskaGodina" readonly />
+</div>
+<div class="form-group">
+    <label>Razred</label>
+    <input class="form-control" asp-for="Razred" readonly />
+</div>
+<div class="form-group">
+    <label>Oznaka</label>
+    <input class="form-control" asp-for="Oznaka" readonly />
+</div>
+<div class="form-group">
+    <label>Razrednik</label>
+    <input class="form-control" asp-for="Razrednik" readonly />
+</div>
+
+<div class="form-group">
+    <label>Broj predmeta</label>
+    <input class="form-control" asp-for="BrojPredmeta" readonly />
+</div>
+
+<a asp-action="Rekonstrukcija" class="btn btn-primary" asp-route-OdjeljenjeId="@Model.OdjeljenjeId">Rekonstrukcija brojeva</a>
+
+
+<div id="divID"></div>
+
+
+<script>
+    $(document).ready(function (event) {
+        $.get("/ajax/index?odjeljenjeId=@Model.OdjeljenjeId", function (data, status) {
+            $("#divID").html(data);
+        });
+    });
+</script>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+@model RS1_Ispit_asp.net_core.ViewModels.PopravniPrikazPopravnihVM
+
+<table class="table">
+    <thead class="bg-success">
+        <tr>
+            <th>Škola</th>
+            <th>
+                Školska
+                godina
+            </th>
+            <th>
+                Datum
+                popravnog
+                ispita
+            </th>
+            <th>
+                Broj učenika na
+                popravnom
+                ispitu
+            </th>
+            <th>
+                Broj učenika koji su
+                položili popravni ispit
+            </th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Skola</td>
+            <td>@x.SkolskaGodina</td>
+            <td>@x.Datum.ToString("dd.MM.yyyy")</td>
+            <td>@x.BrojUcenikaNaPopravnom</td>
+            <td>@x.BrojUcenikaKojiSuPolozili</td>
+            <td><a asp-action="Uredi" asp-route-popravniIspitId="@x.PopravniIspitId" class="btn btn-primary">Uredi</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Dodaj" asp-route-predmetId="@Model.PredmetId" class="btn btn-primary">Dodaj</a>

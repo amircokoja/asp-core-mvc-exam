@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+@model RS1_Ispit_asp.net_core.ViewModels.AjaxStavkeIndexVM
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Odjeljenje</th>
+            <th>
+                Broj u
+                dnevniku
+            </th>
+            <th>
+                Pristupio
+                ispitu
+            </th>
+            <th>Rezultat maturskog</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+            <tr>
+                <td>@x.Ucenik</td>
+                <td>@x.Odjeljenje</td>
+                <td>@x.BrojUDnevniku</td>
+                @if (!x.imaPravoNaPopravi)
+                {
+                    <td class="text-danger">Nema pravo na popravni</td>
+                }
+                @if (x.imaPravoNaPopravi && x.Pristupio)
+                {
+                    <td>
+                        <a class="btn btn-success" ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJeOdsutan" asp-route-popravniIspitUcenikId="@x.PopravniIspitUcenikId" asp-route-PopravniIspitId="@Model.PoravniIspitId">DA</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-danger" ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJePrisutan" asp-route-popravniIspitUcenikId="@x.PopravniIspitUcenikId" asp-route-PopravniIspitId="@Model.PoravniIspitId">NE</a>
+                    </td>
+                }
+                <td>
+                    <input value=@x.Rezultat popravniIspitUcenikId=@x.PopravniIspitUcenikId class="Change" id=@x.PopravniIspitUcenikId />
+                </td>
+                <td>
+                    <a asp-action="Uredi" asp-route-popravniIspitUcenikId="@x.PopravniIspitUcenikId" asp-route-popraviIspitId="@Model.PoravniIspitId" ajax-poziv="da" ajax-rezultat="divID" class="btn btn-info">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(".Change").on('input propertychange', function (event) {
+        event.preventDefault();
+        var popravniIspitUcenikId = $(this).attr("popravniIspitUcenikId");
+        var bodovi = $("#" + popravniIspitUcenikId).val();
+        $.get("/ajaxstavke/SnimiBodovi?popravniIspitUcenikId=" + popravniIspitUcenikId + "&bodovi=" + bodovi, function (data, status) {
+            $("#divID").html(data);
+        });
+    });
+</script>
+
+

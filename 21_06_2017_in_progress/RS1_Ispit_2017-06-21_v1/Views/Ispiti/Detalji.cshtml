@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model RS1_Ispit_2017_06_21_v1.ViewModels.IspitiDetaljiVM
+
+    <h1>Detalji maturskog ispita</h1>
+
+    <form>
+        <div class="form-group">
+            <label>Ispitivač</label>
+            <input asp-for="Ispitivac" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Datum</label>
+            <input asp-for="Datum" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Odjeljenje</label>
+            <input asp-for="Odjeljenje" class="form-control" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Snimi</button>
+    </form>
+
+<div id="divID"></div>
+
+<script>
+    $(document).ready(function () {
+        $.get("/stavke/index?maturskiIspitId=@Model.MaturskiIspitId", function (data, status) {
+            $("#divID").html(data);
+        });
+    });
+</script>

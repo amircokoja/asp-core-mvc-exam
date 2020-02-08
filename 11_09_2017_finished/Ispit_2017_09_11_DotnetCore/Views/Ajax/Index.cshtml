@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model Ispit_2017_09_11_DotnetCore.ViewModels.AjaxIndexVM
+<h3>Odjeljenje stavke</h3>
+<table class="table">
+    <thead class="bg-primary">
+        <tr>
+            <th>Broj u dnevniku</th>
+            <th>Učenik</th>
+            <th>Broj zaključnih ocjena</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+            <tr>
+                <td>@x.BrojUDneviku</td>
+                <td>@x.Ucenik</td>
+                <td>@x.BrojZakljucenihOcjena</td>
+                <td>
+                    <a class="btn btn-danger" ajax-poziv="da" ajax-rezultat="divID" asp-action="Obrisi" asp-route-odjeljenjeStavkaId="@x.OdjeljenjeStavkaId">Obrisi</a>
+                    <a class="btn btn-info" ajax-poziv="da" ajax-rezultat="divID" asp-action="Uredi" asp-route-odjeljenjeStavkaId="@x.OdjeljenjeStavkaId">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-danger" ajax-poziv="da" ajax-rezultat="divID" asp-action="Dodaj" asp-route-odjeljenjeId="@Model.OdjeljenjeId">Dodaj</a>

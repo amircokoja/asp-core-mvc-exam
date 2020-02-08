@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+@model List<RS1_Ispit_asp.net_core.EntityModels.Predmet>
+
+<table class="table">
+    <thead class="bg-success">
+        <tr>
+            <th>Razred</th>
+            <th>Predmet</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Razred</td>
+                <td>@x.Naziv</td>
+                <td><a class="btn btn-primary" asp-action="PrikazPopravnih" asp-route-predmetId="@x.Id">Odaberi</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

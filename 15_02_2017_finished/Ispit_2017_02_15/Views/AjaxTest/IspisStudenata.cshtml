@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Ispis studenata";
+}
+@model Ispit_2017_02_15.ViewModels.AjaxTestIspisStudenataVM
+
+<table class="table">
+    <thead class="bg-info">
+        <tr>
+            <th>Student</th>
+            <th>Bodovi</th>
+            <th>Prisutan</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.listaStudenata)
+        {
+        <tr>
+            <td>@x.Student</td>
+            <td>@x.Bodovi</td>
+            @if (x.Prisutan)
+            {
+                <td><a asp-action="UcenikJeOdsutan" ajax-poziv="odsutan" odrzanicasDetaljiId="@x.OdrzaniCasDetaljiId" class="btn btn-info" asp-route-odrzaniCasDetaljiId="@x.OdrzaniCasDetaljiId">Prisutan</a></td>
+            }
+            else
+            {
+                <td><a asp-action="UcenikJePrisutan" ajax-poziv="prisutan" odrzanicasDetaljiId="@x.OdrzaniCasDetaljiId" class="btn btn-danger" asp-route-odrzaniCasDetaljiId="@x.OdrzaniCasDetaljiId">Odustan</a></td>
+
+            }
+            <td><a asp-action="Uredi" class="btn btn-primary" ajax-poziv="da" ajax-rezultat="divID" odrzanicasDetaljiId="@x.OdrzaniCasDetaljiId" asp-route-odrzaniCasDetaljiId="@x.OdrzaniCasDetaljiId">Uredi</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+
+</script>
