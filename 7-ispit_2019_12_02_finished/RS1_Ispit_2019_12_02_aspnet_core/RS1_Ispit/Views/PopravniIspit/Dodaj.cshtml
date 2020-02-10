@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Proba";
+}
+@model RS1_Ispit_asp.net_core.ViewModels.PopravniIspitDodajVM
+
+    <form asp-action="Snimi">
+        <div class="form-group">
+            <label>Predmet</label>
+            <select class="form-control" asp-for="PredmetId" asp-items="@Model.ListaPredmeta"></select>
+        </div>
+        <div class="form-group">
+            <label>Datum ispita</label>
+            <input class="form-control" asp-for="Datum" />
+        </div>
+        <div class="form-group">
+            <label>Skola</label>
+            <input class="form-control" asp-for="Skola" readonly />
+        </div>
+        <div class="form-group">
+            <label>Skolska godina</label>
+            <input class="form-control" asp-for="SkolskaGodina" readonly />
+        </div>
+        <div class="form-group">
+            <label>Odjeljenje</label>
+            <input class="form-control" asp-for="Odjeljenje" readonly />
+        </div>
+
+        <input type="hidden" asp-for="OdjeljenjeId" />
+
+        <button type="submit" class="btn btn-primary">Snimi</button>
+    </form>

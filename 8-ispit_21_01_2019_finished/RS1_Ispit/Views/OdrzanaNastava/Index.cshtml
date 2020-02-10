@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+@model RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaIndexVM
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Škola</th>
+            <th>Ime i prezime nastavnika</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Skola</td>
+            <td>@x.Nastavnik</td>
+            <td><a asp-action="Odaberi" class="btn btn-primary" asp-route-skolaId="@x.SkolaId" asp-route-nastavnikId="@x.NastavnikId">Odaberi</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

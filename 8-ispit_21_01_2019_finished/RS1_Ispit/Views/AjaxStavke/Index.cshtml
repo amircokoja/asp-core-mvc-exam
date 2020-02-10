@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+
+}
+@model RS1_Ispit_asp.net_core.ViewModels.AjaxStavkeIndexVM
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>
+                Prosjek
+                ocjena
+            </th>
+            <th>
+                Pristupio
+                ispitu
+            </th>
+            <th>Rezultat maturskog</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <td>@x.Ucenik</td>
+            <td>@x.ProsjekOcjena</td>
+            @if (x.Pristupio)
+            {
+                <td><a class="btn btn-success" ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJeOdsutan" asp-route-maturskiIspitStavkeId="@x.MaturskiIspitStavkeId">Da</a></td>
+            }
+            else
+            {
+                <td><a class="btn btn-danger" ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJePrisutan" asp-route-maturskiIspitStavkeId="@x.MaturskiIspitStavkeId">Ne</a></td>
+            }
+            <td>
+                <input value="@x.Rezultat" id=@x.MaturskiIspitStavkeId />
+                <a ajax-poziv="daa" class="btn btn-sm" asp-action="AjaxSnimi" 
+                   asp-route-maturskiIspitStavkeId="@x.MaturskiIspitStavkeId"
+                   asp-route-bodovi="@x.Rezultat" ajax-id=@x.MaturskiIspitStavkeId >Snimi</a>
+            </td>
+            
+            
+            <td><a asp-action="Uredi" ajax-poziv="da" ajax-rezultat="divID" class="btn btn-primary" asp-route-maturskiIspitStavkaId="@x.MaturskiIspitStavkeId">Uredi</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
