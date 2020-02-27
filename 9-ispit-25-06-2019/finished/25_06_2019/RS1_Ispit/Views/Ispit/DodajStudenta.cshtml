@@ -1,0 +1,18 @@
+﻿@using RS1_Ispit_asp.net_core.EntityModels
+
+@{
+    ViewBag.Title = "Index";
+
+}
+@model RS1_Ispit_asp.net_core.ViewModels.IspitDodajStudentaVM
+
+    <form asp-action="SnimiStudenta">
+        <div class="form-group">
+            <label>Student</label>
+            <select class="form-control" asp-for="SlusaPredmetId" asp-items="@Model.ListaStudenata"></select>
+        </div>
+  
+        <input asp-for="IspitId" type="hidden" />
+            <button type="submit" class="btn btn-primary">Snimi</button>
+    </form>
+

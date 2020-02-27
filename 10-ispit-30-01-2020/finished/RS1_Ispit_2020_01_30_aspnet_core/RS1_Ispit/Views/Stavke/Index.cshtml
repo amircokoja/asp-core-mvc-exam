@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model RS1_Ispit_asp.net_core.ViewModels.StavkeIndexVM
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Odjeljenje</th>
+            <th>Broj u dnevniku</th>
+            <th>Pristupio</th>
+            <th>Rezultat</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <th>@x.Odjeljenje</th>
+            <th>@x.BrojUDnevniku</th>
+
+            @if (x.Pristupio)
+            {
+                @if (!Model.Zakljucan)
+                {
+                    <th><a class="btn btn-success" asp-action="UcesnikNijePristupio" asp-route-takmicenjeUcesnikId="@x.TakmicenjeUcesnikId" ajax-poziv="da" ajax-rezultat="divID">Da</a></th>
+                }
+                else
+                {
+                    <th>Da</th>
+                }
+            }
+            else
+            {
+                @if (!Model.Zakljucan)
+                {
+                    <th><a class="btn btn-danger" asp-action="UcesnikJePristupio" asp-route-takmicenjeUcesnikId="@x.TakmicenjeUcesnikId" ajax-poziv="da" ajax-rezultat="divID">Ne</a></th>
+                }
+                else
+                {
+                    <th>Ne</th>
+                }
+            }
+
+            @if (x.Pristupio)
+            {
+                <th><input value="@x.Rezultati" class="inputValue" id="@x.TakmicenjeUcesnikId" takmicenjeUcesnikId="@x.TakmicenjeUcesnikId" /></th>
+
+            }
+            else
+            {
+                <th>x</th>
+            }
+
+            @if (x.Pristupio && !Model.Zakljucan)
+            {
+                <th><a class="btn btn-info" asp-action="UrediUcesnika" 
+                       asp-route-takmicenjeUcesnikId="@x.TakmicenjeUcesnikId" 
+                       ajax-poziv="da" ajax-rezultat="divID">Uredi</a></th>
+            }
+            else
+            {
+                <th></th>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="DodajUcesnika" asp-route-takmicenjeId="@Model.TakmicenjeId"
+   ajax-poziv="da" ajax-rezultat="divID">Dodaj ucesnika</a>
+
+<script>
+
+
+</script>

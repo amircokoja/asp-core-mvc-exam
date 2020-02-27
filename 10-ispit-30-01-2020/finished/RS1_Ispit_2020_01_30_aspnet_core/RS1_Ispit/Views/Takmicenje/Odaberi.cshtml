@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Odaberi";
+}
+@model RS1_Ispit_asp.net_core.ViewModels.TakmicenjeOdaberiVM
+
+<h2>Skola domacin @Model.Skola</h2>
+<h2>Razred</h2>
+@if (Model.Razred == 0)
+{
+<p>Nije odabran</p>    
+}
+else
+{
+<p>@Model.Razred</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tamičenje ID</th>
+            <th>Predmet</th>
+            <th>Razred</th>
+            <th>Datum</th>
+            <th>
+                Broj
+                učesnika
+                koji nisu
+                pristupili
+            </th>
+            <th>Najbolji učesnik</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+        <tr>
+            <th>@x.TakmicenjeId</th>
+            <th>@x.Predmet</th>
+            <th>@x.Razred</th>
+            <th>@x.Datum.ToString("dd.MM.yyyy")</th>
+            <th>@x.BrojUcesnikaKojiNisuPristupili</th>
+            <th>@x.NajboljiUcesnik</th>
+            <th><a class="btn btn-info" asp-action="Rezultati" asp-route-takmicenjeId="@x.TakmicenjeId">Rezultati</a></th>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dodaj" asp-route-skolaId="@Model.SkolaId" asp-route-razred="@Model.Razred">Dodaj</a>
+
+
+

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model RS1_Ispit_asp.net_core.ViewModels.TakmicenjeIndexVM
+
+    <form asp-action="Odaberi">
+        <div class="form-group">
+            <label>Skola domacin</label>
+            <select asp-for="SkolaId" asp-items="@Model.ListaSkola" class="form-control">
+                <option selected disabled>(Odaberite skolu)</option>
+            </select>
+            <span asp-validation-for="SkolaId"></span>
+        </div>
+        <div class="form-group">
+            <label>Razred</label>
+            <select asp-for="Razred" class="form-control">
+                <option selected disabled>(Odaberite razred)</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Odaberi</button>
+    </form>
