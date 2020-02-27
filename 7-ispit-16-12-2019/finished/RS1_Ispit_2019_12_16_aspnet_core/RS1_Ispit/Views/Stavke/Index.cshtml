@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model RS1_Ispit_asp.net_core.ViewModels.StavkeIndexVM
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ucenik</th>
+            <th>Odjeljenje</th>
+            <th>Broj u dnevniku</th>
+            <th>Pristupio ispitu</th>
+            <th>Rezutat</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in @Model.rows)
+        {
+        <tr>
+            <td>@x.Ucenik</td>
+            <td>@x.Odjeljenje</td>
+            <td>@x.BrojUDnevniku</td>
+
+
+            @if (!x.ImaPravoNaPopravni)
+            {
+                <td>Nema pravno na popravni</td>
+            }
+            else if (x.Pristupio)
+            {
+                <td><a ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJeOdsutan" asp-route-popravniUcesnikId="@x.PopravniUcesnikId" class="btn btn-success">Da</a></td>
+            }
+            else
+            {
+                <td><a ajax-poziv="da" ajax-rezultat="divID" asp-action="UcenikJePrisutan" asp-route-popravniUcesnikId="@x.PopravniUcesnikId" class="btn btn-danger">Ne</a></td>
+            }
+
+            @if(x.Pristupio)
+            {
+                <td><input value="@x.Rezultat" id="@x.PopravniUcesnikId" class="inputChange" /></td>
+            }
+            else
+            {
+                <td>x</td>
+            }
+
+            @if (x.Pristupio)
+            {
+                <td><a ajax-poziv="da" ajax-rezultat="divID" asp-action="Uredi" asp-route-popravniUcesnikId="@x.PopravniUcesnikId" class="btn btn-info">Uredi</a></td>
+            } else
+            {
+                <td></td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script>
+    $(".inputChange").focusout(function () {
+        var id = $(this).attr("id");
+        var bodovi = $(this).val();
+
+        $.get("/stavke/snimiFocusOut?popravniUcenikId=" + id + "&bodovi=" + bodovi, function (data, status) {
+            $("#divID").html(data);
+        });
+    });
+</script>

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@model RS1_Ispit_asp.net_core.ViewModels.PopravniIspitDodajVM
+
+    <div class="form-group">
+        <div class="form-group">
+            <label>Clan komisije 1</label>
+            <input asp-for="ClanKomisije1" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Clan komisije 2</label>
+            <input asp-for="ClanKomisije2" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Clan komisije 3</label>
+            <input asp-for="ClanKomisije3" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Datum ispita</label>
+            <input asp-for="Datum" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Predmet</label>
+            <input asp-for="Predmet" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Skola</label>
+            <input asp-for="Skola" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Skolska godina</label>
+            <input asp-for="SkolskaGodina" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label>Razred</label>
+            <input asp-for="Razred" class="form-control" readonly />
+        </div>
+
+
+
+        <div id="divID"></div>
+
+        <a ajax-poziv="da" ajax-rezultat="divID" asp-action="DodajUcenika" asp-route-popravniIspitId="@Model.PopravniIspitId" class="btn btn-primary">Dodaj ucenika</a>
+        <a asp-action="DodajPopravniIspit" asp-route-popravniIspitId="@Model.PopravniIspitId" class="btn btn-primary">Dodaj popravni ispit</a>
+    </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $.get("/stavke/index?popravniIspitId=@Model.PopravniIspitId", function (data, status) {
+            $("#divID").html(data)
+        });
+    });
+</script>
